@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory Noise Awareness | Protect Your Hearing</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="[fonts.googleapis.com](https://fonts.googleapis.com)">
+    <link rel="preconnect" href="[fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+    <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap)" rel="stylesheet">
+    <link rel="stylesheet" href="[cdnjs.cloudflare.com](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="sound-wave">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <p>Loading Safety First...</p>
+        </div>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-volume-up"></i>
+                <span>NoiseAware</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="hazards.html" class="nav-link">Hazards</a></li>
+                <li><a href="prevention.html" class="nav-link">Prevention</a></li>
+                <li><a href="quiz.html" class="nav-link">Risk Quiz</a></li>
+                <li><a href="chatbot.html" class="nav-link">Ask AI</a></li>
+                <li><a href="ethics.html" class="nav-link">Ethics</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-background">
+            <div class="noise-particles" id="particles"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge animate-fade-in">
+                <i class="fas fa-shield-alt"></i>
+                <span>Occupational Safety Campaign</span>
+            </div>
+            <h1 class="hero-title animate-slide-up">
+                <span class="highlight">Protect</span> Your Hearing
+                <br>In The Factory
+            </h1>
+            <p class="hero-subtitle animate-slide-up delay-1">
+                Understanding workplace noise hazards can save your hearing. 
+                Learn how to identify risks and protect yourself every day.
+            </p>
+            <div class="hero-stats animate-fade-in delay-2">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-number" data-count="22">0</span><span class="stat-suffix">M</span>
+                        <p>Workers exposed annually</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-ear-deaf"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-number" data-count="85">0</span><span class="stat-suffix">dB</span>
+                        <p>OSHA action level</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-percent"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-number" data-count="100">0</span><span class="stat-suffix">%</span>
+                        <p>Preventable hearing loss</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-cta animate-slide-up delay-3">
+                <a href="hazards.html" class="btn btn-primary">
+                    <span>Learn About Hazards</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="quiz.html" class="btn btn-secondary">
+                    <span>Take Risk Assessment</span>
+                    <i class="fas fa-clipboard-check"></i>
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <p>Scroll to explore</p>
+        </div>
+    </header>
+    <!-- Decibel Meter Section -->
+    <section class="decibel-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Interactive Learning</span>
+                <h2>Understanding <span class="highlight">Noise Levels</span></h2>
+                <p>See how different factory sounds compare and when hearing protection is required</p>
+            </div>
+            
+            <div class="decibel-meter-container">
+                <div class="decibel-scale">
+                    <div class="scale-marker safe" style="--level: 0%">
+                        <span class="db-value">0 dB</span>
+                        <span class="db-label">Threshold of hearing</span>
+                    </div>
+                    <div class="scale-marker safe" style="--level: 17%">
+                        <span class="db-value">30 dB</span>
+                        <span class="db-label">Whisper</span>
+                    </div>
+                    <div class="scale-marker safe" style="--level: 35%">
+                        <span class="db-value">60 dB</span>
+                        <span class="db-label">Normal conversation</span>
+                    </div>
+                    <div class="scale-marker caution" style="--level: 47%">
+                        <span class="db-value">80 dB</span>
+                        <span class="db-label">Heavy traffic</span>
+                    </div>
+                    <div class="scale-marker warning" style="--level: 50%">
+                        <span class="db-value">85 dB</span>
+                        <span class="db-label">⚠️ OSHA Action Level</span>
+                    </div>
+                    <div class="scale-marker danger" style="--level: 58%">
+                        <span class="db-value">95 dB</span>
+                        <span class="db-label">Power tools</span>
+                    </div>
+                    <div class="scale-marker danger" style="--level: 70%">
+                        <span class="db-value">110 dB</span>
+                        <span class="db-label">Factory machinery</span>
+                    </div>
+                    <div class="scale-marker extreme" style="--level: 82%">
+                        <span class="db-value">130 dB</span>
+                        <span class="db-label">Jet engine (nearby)</span>
+                    </div>
+                    <div class="scale-marker extreme" style="--level: 100%">
+                        <span class="db-value">140 dB</span>
+                        <span class="db-label">Threshold of pain</span>
+                    </div>
+                </div>
+                
+                <div class="sound-examples">
+                    <h3>Click to hear factory sounds at safe levels:</h3>
+                    <div class="sound-buttons">
+                        <button class="sound-btn" data-sound="conveyor" data-db="75">
+                            <i class="fas fa-cogs"></i>
+                            <span>Conveyor Belt</span>
+                            <small>~75 dB</small>
+                        </button>
+                        <button class="sound-btn" data-sound="press" data-db="95">
+                            <i class="fas fa-compress-arrows-alt"></i>
+                            <span>Hydraulic Press</span>
+                            <small>~95 dB</small>
+                        </button>
+                        <button class="sound-btn" data-sound="grinder" data-db="100">
+                            <i class="fas fa-circle-notch"></i>
+                            <span>Metal Grinder</span>
+                            <small>~100 dB</small>
+                        </button>
+                        <button class="sound-btn" data-sound="forklift" data-db="85">
+                            <i class="fas fa-truck-loading"></i>
+                            <span>Forklift</span>
+                            <small>~85 dB</small>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Quick Facts Section -->
+    <section class="facts-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Key Information</span>
+                <h2>What Every <span class="highlight">Factory Worker</span> Should Know</h2>
+            </div>
+            
+            <div class="facts-grid">
+                <div class="fact-card" data-aos="fade-up">
+                    <div class="fact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Time Matters</h3>
+                    <p>At 85 dB, you can safely be exposed for 8 hours. At 95 dB, that drops to just 4 hours. Every 3 dB increase halves safe exposure time.</p>
+                </div>
+                
+                <div class="fact-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="fact-icon warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Permanent Damage</h3>
+                    <p>Noise-induced hearing loss is irreversible. Once the tiny hair cells in your inner ear are damaged, they cannot regenerate.</p>
+                </div>
+                
+                <div class="fact-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="fact-icon success">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <h3>Protection Works</h3>
+                    <p>Properly fitted earplugs can reduce noise by 15-30 dB. Earmuffs can reduce noise by 20-30 dB. Combined, even better!</p>
+                </div>
+                
+                <div class="fact-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="fact-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Regular Testing</h3>
+                    <p>Annual hearing tests (audiograms) can detect early signs of hearing loss before you notice symptoms yourself.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Interactive Risk Zones -->
+    <section class="risk-zones-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Factory Floor Guide</span>
+                <h2>Identify <span class="highlight">High-Risk Zones</span></h2>
+                <p>Hover over different areas to learn about noise hazards</p>
+            </div>
+            
+            <div class="factory-map">
+                <div class="factory-layout">
+                    <div class="zone zone-green" data-zone="office">
+                        <i class="fas fa-desktop"></i>
+                        <span>Office Area</span>
+                        <div class="zone-tooltip">
+                            <h4>Office Area - LOW RISK</h4>
+                            <p><strong>Typical Level:</strong> 50-65 dB</p>
+                            <p>Generally safe. Normal conversation possible.</p>
+                            <p><strong>PPE:</strong> Not required</p>
+                        </div>
+                    </div>
+                    
+                    <div class="zone zone-yellow" data-zone="assembly">
+                        <i class="fas fa-tools"></i>
+                        <span>Assembly Line</span>
+                        <div class="zone-tooltip">
+                            <h4>Assembly Line - MODERATE RISK</h4>
+                            <p><strong>Typical Level:</strong> 75-85 dB</p>
+                            <p>Prolonged exposure may cause hearing damage.</p>
+                            <p><strong>PPE:</strong> Earplugs recommended</p>
+                        </div>
+                    </div>
+                    
+                    <div class="zone zone-orange" data-zone="welding">
+                        <i class="fas fa-fire"></i>
+                        <span>Welding Station</span>
+                        <div class="zone-tooltip">
+                            <h4>Welding Station - HIGH RISK</h4>
+                            <p><strong>Typical Level:</strong> 85-95 dB</p>
+                            <p>Hearing protection mandatory. Limit exposure time.</p>
+                            <p><strong>PPE:</strong> Earplugs or earmuffs required</p>
+                        </div>
+                    </div>
+                    
+                    <div class="zone zone-red" data-zone="pressing">
+                        <i class="fas fa-compress"></i>
+                        <span>Press Room</span>
+                        <div class="zone-tooltip">
+                            <h4>Press Room - VERY HIGH RISK</h4>
+                            <p><strong>Typical Level:</strong> 95-110 dB</p>
+                            <p>Immediate hearing damage possible without protection.</p>
+                            <p><strong>PPE:</strong> Double protection required</p>
+                        </div>
+                    </div>
+                    
+                    <div class="zone zone-red" data-zone="grinding">
+                        <i class="fas fa-cog"></i>
+                        <span>Grinding Area</span>
+                        <div class="zone-tooltip">
+                            <h4>Grinding Area - VERY HIGH RISK</h4>
+                            <p><strong>Typical Level:</strong> 100-115 dB</p>
+                            <p>Extremely hazardous. Strict time limits apply.</p>
+                            <p><strong>PPE:</strong> Double protection + rotation</p>
+                        </div>
+                    </div>
+                    
+                    <div class="zone zone-green" data-zone="break">
+                        <i class="fas fa-coffee"></i>
+                        <span>Break Room</span>
+                        <div class="zone-tooltip">
+                            <h4>Break Room - SAFE ZONE</h4>
+                            <p><strong>Typical Level:</strong> 45-60 dB</p>
+                            <p>Quiet area for hearing recovery.</p>
+                            <p><strong>PPE:</strong> Not required</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="legend">
+                    <div class="legend-item">
+                        <span class="legend-color green"></span>
+                        <span>Safe (&lt;75 dB)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color yellow"></span>
+                        <span>Moderate (75-85 dB)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color orange"></span>
+                        <span>High (85-95 dB)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color red"></span>
+                        <span>Very High (&gt;95 dB)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Test Your <span class="highlight">Noise Safety Knowledge?</span></h2>
+                <p>Take our interactive risk assessment quiz to evaluate your understanding of factory noise hazards and protection methods.</p>
+                <div class="cta-buttons">
+                    <a href="quiz.html" class="btn btn-primary btn-large">
+                        <i class="fas fa-clipboard-check"></i>
+                        <span>Start Risk Assessment</span>
+                    </a>
+                    <a href="chatbot.html" class="btn btn-outline btn-large">
+                        <i class="fas fa-robot"></i>
+                        <span>Ask AI Assistant</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">
+                        <i class="fas fa-volume-up"></i>
+                        <span>NoiseAware</span>
+                    </a>
+                    <p>Protecting factory workers through education and awareness. Your hearing is precious—let's keep it that way.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="hazards.html">Noise Hazards</a></li>
+                        <li><a href="prevention.html">Prevention</a></li>
+                        <li><a href="quiz.html">Risk Quiz</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="chatbot.html">AI Assistant</a></li>
+                        <li><a href="ethics.html">Ethics & Privacy</a></li>
+                        <li><a href="#" target="_blank">OSHA Guidelines</a></li>
+                        <li><a href="#" target="_blank">NIOSH Resources</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Emergency Contact</h4>
+                    <p><i class="fas fa-phone"></i> Safety Hotline: 1-800-XXX-XXXX</p>
+                    <p><i class="fas fa-envelope"></i> safety@company.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Safety Office: Building A, Floor 1</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 NoiseAware Campaign. Created for OSH Educational Purposes.</p>
+                <p>This is a student project for occupational safety education.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Firebase SDKs -->
+    <script src="[gstatic.com](https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js)"></script>
+    <script src="[gstatic.com](https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js)"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
