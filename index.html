@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SonicSafe | AI Noise Awareness</title>
+    <!-- CSS and Fonts -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">SONIC<span>SAFE</span></div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#hazards">Hazards</a></li>
+            <li><a href="#ai-hub">AI Chatbot</a></li>
+            <li><a href="#ethics">Ethics</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Protect Your Hearing.</h1>
+            <p>Advanced AI-driven safety advocacy for modern factory environments.</p>
+            <a href="#ai-hub" class="btn">Talk to our AI</a>
+        </div>
+    </section>
+
+    <section id="hazards" class="content-section">
+        <h2 data-aos="fade-down">The Hazard: Factory Noise</h2>
+        <div class="grid">
+            <div class="card" data-aos="zoom-in">
+                <i class="fas fa-volume-up"></i>
+                <h3>High Intensity</h3>
+                <p>Exposure over 85dB requires immediate protection.</p>
+            </div>
+            <div class="card" data-aos="zoom-in" data-aos-delay="200">
+                <i class="fas fa-shield-virus"></i>
+                <h3>Prevention</h3>
+                <p>PPE and engineering controls save your hearing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI CHATBOT SECTION (IR4.0 Hub) -->
+    <section id="ai-hub" class="interactive-hub">
+        <div class="hub-header" data-aos="fade-up">
+            <h2>AI Chatbot</h2>
+            <p>Our responsive safety engine is ready to answer your questions.</p>
+        </div>
+        
+        <div class="chatbot-container" data-aos="zoom-in">
+            <div class="chat-header">
+                <div class="status-dot"></div>
+                <span>SonicSafe Intelligent Assistant</span>
+            </div>
+            <div class="chat-box" id="chat-box">
+                <div class="bot-msg">Hello! I am an AI trained on OSH standards. You can ask me anything—from "What is noise?" to "Tell me about Malaysian safety laws."</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="user-input" placeholder="Type your message here..." onkeypress="handleKeyPress(event)">
+                <button type="button" onclick="sendMessage()" id="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="ethics" class="ethics-page">
+        <h2>Ethics & Privacy</h2>
+        <div class="ethics-content">
+            <h3>Privacy & Data</h3>
+            <p>This AI interface processes data locally. No personal conversations are stored on external servers, ensuring 100% data privacy.</p>
+            <h3>Attribution</h3>
+            <p>Developed using IR4.0 web technologies. Safety data referenced from OSHA 1994 and the Factories and Machinery Act.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 SonicSafe | OSH IR4.0 Project</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+    <script>AOS.init();</script>
+</body>
+</html>
