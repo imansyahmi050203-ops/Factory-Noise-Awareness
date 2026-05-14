@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Factory Noise Awareness | Hearing Protection & Safety</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Inter', sans-serif;
+}
+
+body {
+    background: #f0f9ff;
+    color: #0c4a6e;
+    scroll-behavior: smooth;
+}
+
+/* NAVBAR - COMPACT & CENTERED */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    z-index: 99999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s;
+}
+nav.scrolled {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.98);
+}
+.logo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+.logo span { color: #06b6d4; }
+.nav-links {
+    display: flex;
+    gap: 0.8rem;
+    list-style: none;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.nav-links li a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: #1f2937;
+    transition: 0.2s;
+    white-space: nowrap;
+    padding: 0 0.2rem;
+}
+.nav-links a:hover { color: #06b6d4; }
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #06b6d4;
+}
+@media (max-width: 1100px) {
+    .nav-links { gap: 0.5rem; }
+    .nav-links li a { font-size: 0.75rem; }
+}
+@media (max-width: 950px) {
+    .menu-toggle { display: block; }
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 70%;
+        height: calc(100vh - 70px);
+        background: white;
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.2rem;
+        transition: 0.3s;
+        box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+        z-index: 999;
+    }
+    .nav-links li a { font-size: 1rem; white-space: normal; }
+    .nav-links.active { left: 0; }
+    nav { padding: 0 5%; }
+}
+@media (max-width: 768px) {
+    .logo { font-size: 1.3rem; }
+    nav { height: 65px; }
+}
+
+/* HERO */
+.hero {
+    margin-top: 70px;
+    min-height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    position: relative;
+}
+.hero-content {
+    max-width: 1000px;
+    color: white;
+}
+.hero h1 {
+    font-size: 3.2rem;
+    line-height: 1.2;
+    margin-bottom: 25px;
+}
+.hero-intro {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 25px 0;
+}
+.stat-badge {
+    background: rgba(6,182,212,0.2);
+    backdrop-filter: blur(5px);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.stat-badge:hover {
+    transform: translateY(-2px);
+    background: rgba(6,182,212,0.4);
+}
+.btn {
+    display: inline-block;
+    background: #06b6d4;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
+    margin-top: 10px;
+    font-size: 0.95rem;
+}
+.btn:hover { transform: translateY(-3px); background: #0891b2; }
+
+/* SECTION STYLES */
+.section {
+    padding: 60px 8%;
+}
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: #0c4a6e;
+}
+.section-sub {
+    text-align: center;
+    color: #475569;
+    margin-bottom: 2.5rem;
+    font-size: 0.95rem;
+}
+
+/* Grid styles */
+.signs-grid, .routine-grid, .assessment-grid, .privacy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+.sign-card, .routine-card, .assessment-card, .privacy-card {
+    background: white;
+    padding: 22px;
+    border-radius: 24px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    border-left: 5px solid #06b6d4;
+}
+.sign-card:hover, .routine-card:hover, .assessment-card:hover, .privacy-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+.sign-card i, .routine-card i, .assessment-card i, .privacy-card i { font-size: 2rem; color: #06b6d4; margin-bottom: 12px; }
+.sign-card h3, .routine-card h3, .assessment-card h3, .privacy-card h3 { margin-bottom: 10px; color: #0c4a6e; font-size: 1.2rem; }
+.sign-card p, .routine-card p, .assessment-card p { font-size: 0.9rem; color: #334155; }
+
+/* Protection Devices */
+.devices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+.device-card {
+    background: white;
+    padding: 20px;
+    border-radius: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.device-card.active {
+    background: #06b6d4;
+    color: white;
+    transform: scale(1.02);
+}
+.device-card.active i { color: white; }
+.device-card i { font-size: 2rem; color: #06b6d4; margin-bottom: 12px; }
+.device-card h3 { font-size: 1.1rem; margin-bottom: 5px; }
+.device-detail {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    display: none;
+}
+.device-card.active .device-detail { display: block; }
+
+/* Best Practices Accordion */
+.practice-list {
+    background: white;
+    border-radius: 28px;
+    overflow: hidden;
+    margin: 25px 0;
+}
+.practice-item {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0;
+}
+.practice-header {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+    background: white;
+}
+.practice-header:hover { background: #f0f9ff; }
+.practice-header i:first-child { color: #06b6d4; font-size: 1.1rem; }
+.practice-header .practice-title { flex: 1; font-weight: 600; font-size: 0.95rem; }
+.practice-detail {
+    padding: 0 20px 0 45px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    color: #475569;
+    line-height: 1.5;
+    font-size: 0.85rem;
+}
+.practice-item.open .practice-detail {
+    padding: 0 20px 15px 45px;
+    max-height: 120px;
+}
+
+/* Sources section */
+.sources-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 30px 0;
+    position: relative;
+}
+.source-tag {
+    background: white;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.25s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    z-index: 5;
+}
+.source-tag:hover {
+    background: #06b6d4;
+    color: white;
+    transform: scale(1.03);
+    box-shadow: 0 8px 15px rgba(6,182,212,0.3);
+}
+
+/* Floating preview */
+.source-preview-img {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    max-width: 240px;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 10px;
+    box-shadow: 0 20px 35px -10px rgba(0,0,0,0.4);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid rgba(255,255,255,0.4);
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(10px);
+}
+.source-preview-img.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: none;
+}
+.source-preview-img img {
+    width: 100%;
+    border-radius: 16px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    background: #f0fdf4;
+    border: 2px solid rgba(255,255,255,0.7);
+}
+.source-preview-img span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 1px 2px black;
+    background: rgba(0,0,0,0.6);
+    padding: 3px 10px;
+    border-radius: 40px;
+}
+
+/* References styling */
+.references-container, .privacy-container {
+    background: white;
+    border-radius: 24px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    margin-top: 20px;
+}
+.ref-list, .privacy-list {
+    list-style: none;
+}
+.ref-list li, .privacy-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    font-size: 0.9rem;
+}
+.ref-list li i, .privacy-list li i {
+    color: #06b6d4;
+    font-size: 1rem;
+    min-width: 24px;
+    margin-top: 2px;
+}
+.privacy-badge {
+    display: inline-block;
+    background: #e0f2fe;
+    color: #06b6d4;
+    padding: 2px 10px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.25s;
+}
+.modal-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+.modal-container {
+    background: white;
+    max-width: 500px;
+    width: 90%;
+    border-radius: 24px;
+    padding: 25px;
+    position: relative;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+.modal-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #0c4a6e;
+}
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: #94a3b8;
+}
+.modal-close:hover { color: #ef4444; }
+.quiz-option {
+    background: #f1f5f9;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+.quiz-option:hover { background: #e2e8f0; transform: translateX(5px); }
+.quiz-feedback {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+.calculator-field {
+    margin: 15px 0;
+}
+.calculator-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+.calculator-field input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 30px;
+    border: 1px solid #cbd5e1;
+    font-size: 0.9rem;
+}
+.calc-result {
+    background: #e0f2fe;
+    padding: 12px;
+    border-radius: 20px;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+.prevent-list {
+    list-style: none;
+}
+.prevent-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+.prevent-list li i { color: #06b6d4; width: 24px; font-size: 1rem; }
+
+/* Chatbot */
+.chatbot-wrapper {
+    max-width: 750px;
+    margin: auto;
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.chat-header {
+    background: #06b6d4;
+    color: white;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+.chat-box {
+    height: 400px;
+    overflow-y: auto;
+    background: #f9fafb;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.bot-msg, .user-msg {
+    max-width: 75%;
+    padding: 10px 15px;
+    border-radius: 18px;
+    line-height: 1.4;
+    font-size: 0.9rem;
+}
+.bot-msg {
+    background: white;
+    align-self: flex-start;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.user-msg {
+    background: #06b6d4;
+    color: white;
+    align-self: flex-end;
+}
+.chat-input {
+    display: flex;
+    padding: 15px;
+    gap: 10px;
+    background: white;
+}
+.chat-input input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 50px;
+    background: #f3f4f6;
+    outline: none;
+    font-size: 0.9rem;
+}
+.chat-input button {
+    width: 50px;
+    border: none;
+    border-radius: 50%;
+    background: #06b6d4;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.chat-input button:hover { transform: scale(1.03); }
+footer {
+    background: #0c4a6e;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 60px;
+    font-size: 0.8rem;
+}
+footer a { color: #90e0ef; text-decoration: none; }
+@media (max-width: 768px) {
+    .hero h1 { font-size: 1.8rem; }
+    .section-title { font-size: 1.6rem; }
+    .section { padding: 40px 5%; }
+    .signs-grid, .routine-grid, .assessment-grid { grid-template-columns: 1fr; }
+    .source-preview-img { width: 150px; bottom: 10px; right: 10px; }
+    .bot-msg, .user-msg { max-width: 85%; }
+    .stat-badge { font-size: 0.75rem; padding: 4px 12px; }
+    .btn { padding: 10px 24px; font-size: 0.85rem; }
+}
+</style>
+</head>
+<body>
+
+<div id="interactiveModal" class="modal-overlay">
+    <div class="modal-container">
+        <span id="modalCloseBtn" class="modal-close">&times;</span>
+        <div id="modalDynamicContent"></div>
+    </div>
+</div>
+
+<nav id="navbar">
+    <div class="logo">FACTORY<span>NOISE</span></div>
+    <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#early-signs">Early Signs</a></li>
+        <li><a href="#protection">Protection</a></li>
+        <li><a href="#safety-routine">Safety Routine</a></li>
+        <li><a href="#noise-assessment">Noise Assessment</a></li>
+        <li><a href="#sources">Noise Sources</a></li>
+        <li><a href="#references">References</a></li>
+        <li><a href="#privacy">Privacy & Ethics</a></li>
+        <li><a href="#chatbot">AI Chat</a></li>
+    </ul>
+</nav>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>Factory Noise Awareness:<br>Hearing protection and early signs of hearing loss on manufacturing lines.</h1>
+        <div class="hero-intro">
+            Factory noise is a leading cause of permanent, irreversible, yet entirely preventable, sensorineural hearing loss. Manufacturing environments often exceed safe limits (85 dBA averaged over 8 hours), making it crucial to understand how to protect hearing and identify early signs of damage.
+        </div>
+        <div class="hero-stats">
+            <span class="stat-badge" id="quizBadge"><i class="fas fa-question-circle"></i> 📋 Noise Safety Quiz</span>
+            <span class="stat-badge" id="calculatorBadge"><i class="fas fa-calculator"></i> 📊 Exposure Calculator</span>
+            <span class="stat-badge" id="preventiveBadge"><i class="fas fa-shield-virus"></i> 🛡️ Preventive Measures</span>
+        </div>
+        <a href="#chatbot" class="btn"><i class="fas fa-comment-dots"></i> Ask Factory Noise AI</a>
+    </div>
+</section>
+
+<section class="section" id="early-signs">
+    <h2 class="section-title">Early Signs of Hearing Loss in Manufacturing</h2>
+    <p class="section-sub">Noise-induced hearing loss (NIHL) occurs gradually — most significant damage often occurs in the first 6–10 years of employment.</p>
+    <div class="signs-grid">
+        <div class="sign-card"><i class="fas fa-ring"></i><h3>Tinnitus</h3><p>Persistent ringing, buzzing, or humming in one or both ears.</p></div>
+        <div class="sign-card"><i class="fas fa-ear-deaf"></i><h3>Temporary Hearing Shifts</h3><p>Muffled sounds or feeling of "fullness" in ears after leaving shift.</p></div>
+        <div class="sign-card"><i class="fas fa-comments"></i><h3>Difficulty with Speech</h3><p>Inability to hear high-pitched sounds or understand conversations in noisy environments.</p></div>
+        <div class="sign-card"><i class="fas fa-volume-up"></i><h3>Volume Changes</h3><p>Need to increase radio/phone volume immediately after a shift.</p></div>
+        <div class="sign-card"><i class="fas fa-tired"></i><h3>Irritability & Fatigue</h3><p>Increased stress or fatigue due to constant auditory effort.</p></div>
+    </div>
+</section>
+
+<section class="section" id="protection">
+    <h2 class="section-title">Hearing Protection Strategies & Devices</h2>
+    <p class="section-sub">Employers must implement a hearing conservation program when noise exposure equals or exceeds 85 dBA. Click each device for details.</p>
+    <div class="devices-grid" id="devicesGrid">
+        <div class="device-card" data-device="foam"><i class="fas fa-plug"></i><h3>Foam Earplugs</h3><div class="device-detail">Ideal for consistent, high-noise environments. Disposable, when inserted correctly offer high protection (NRR up to 33 dB).</div></div>
+        <div class="device-card" data-device="earmuffs"><i class="fas fa-head-side-headphones"></i><h3>Earmuffs</h3><div class="device-detail">Suitable for frequent on-off entry. Consistent seal, easy to fit properly (NRR 20-30 dB).</div></div>
+        <div class="device-card" data-device="dual"><i class="fas fa-shield-alt"></i><h3>Dual Protection</h3><div class="device-detail">For extreme noise areas (over 100 dB). Combining plugs + earmuffs provides additional 10-15 dB reduction.</div></div>
+        <div class="device-card" data-device="custom"><i class="fas fa-microchip"></i><h3>Custom-Molded</h3><div class="device-detail">Superior comfort and fit, preferred for daily long-term use; precise attenuation.</div></div>
+    </div>
+    <h3 style="margin: 30px 0 15px; font-size:1.3rem;"><i class="fas fa-clipboard-list"></i> Best Practices for Factory Safety</h3>
+    <div class="practice-list">
+        <div class="practice-item"><div class="practice-header"><i class="fas fa-check-circle"></i><span class="practice-title">Ensure Proper Fit</span><i class="fas fa-chevron-down"></i></div><div class="practice-detail">Hearing protection is useless if it does not fit correctly. Earmuffs must seal tightly around the ear, and foam plugs must expand fully in the ear canal.</div></div>
+        <div class="practice-item"><div class="practice-header"><i class="fas fa-smile"></i><span class="practice-title">Prioritize Comfort</span><i class="fas fa-chevron-down"></i></div><div class="practice-detail">The best protection is the one workers actually wear — comfort is key to compliance.</div></div>
+        <div class="practice-item"><div class="practice-header"><i class="fas fa-tools"></i><span class="practice-title">Maintain Equipment</span><i class="fas fa-chevron-down"></i></div><div class="practice-detail">Regularly inspect and clean earmuffs; replace worn-out cushions.</div></div>
+        <div class="practice-item"><div class="practice-header"><i class="fas fa-chart-line"></i><span class="practice-title">Annual Audits</span><i class="fas fa-chevron-down"></i></div><div class="practice-detail">Regular audiometric testing is crucial for identifying early signs of hearing loss.</div></div>
+        <div class="practice-item"><div class="practice-header"><i class="fas fa-microphone-alt"></i><span class="practice-title">Engineering Controls</span><i class="fas fa-chevron-down"></i></div><div class="practice-detail">Use noise-dampening materials for machinery and install barriers to reduce noise at the source.</div></div>
+    </div>
+</section>
+
+<section class="section" id="safety-routine">
+    <h2 class="section-title">🔁 Daily Safety Routine for Noise Exposure</h2>
+    <p class="section-sub">Implement this routine to protect your hearing and maintain compliance.</p>
+    <div class="routine-grid">
+        <div class="routine-card"><i class="fas fa-check-circle"></i><h3>Before Shift</h3><p>Inspect hearing protection for damage. Check that foam plugs are clean and pliable. Ensure earmuffs have intact seals. Review noise zone signage.</p></div>
+        <div class="routine-card"><i class="fas fa-hard-hat"></i><h3>During Shift</h3><p>Always wear protection in designated areas. Take quiet breaks in low-noise zones (minimum 15 mins every 2 hours). Report any sudden increase in machinery noise.</p></div>
+        <div class="routine-card"><i class="fas fa-ear-listen"></i><h3>After Shift</h3><p>Perform self-check: any ringing or muffled hearing? Clean reusable plugs. Note any symptoms in the daily log. Schedule annual audiometry test.</p></div>
+        <div class="routine-card"><i class="fas fa-chalkboard-teacher"></i><h3>Weekly Habit</h3><p>Team safety huddle: discuss noise concerns. Exchange feedback on PPE comfort. Rotate tasks to limit individual daily exposure.</p></div>
+    </div>
+</section>
+
+<section class="section" id="noise-assessment">
+    <h2 class="section-title">📊 Factory Noise Assessment Protocol</h2>
+    <p class="section-sub">Regular noise monitoring is required by OSHA 1994 (Malaysia) and international standards.</p>
+    <div class="assessment-grid">
+        <div class="assessment-card"><i class="fas fa-microphone-alt"></i><h3>Initial Walkthrough</h3><p>Identify areas where normal conversation is difficult (above 85 dBA). Map hot zones and mark with warning signs.</p></div>
+        <div class="assessment-card"><i class="fas fa-tachometer-alt"></i><h3>Sound Level Meter</h3><p>Use Class 2 meter at ear height. Measure A-weighted decibels (dBA) at different times (peak production vs maintenance).</p></div>
+        <div class="assessment-card"><i class="fas fa-chart-line"></i><h3>Personal Dosimetry</h3><p>Attach noise dosimeters to workers for full-shift measurement (8 hrs). Calculate 8-hour TWA. Compare to action limit (85 dBA).</p></div>
+        <div class="assessment-card"><i class="fas fa-clipboard-list"></i><h3>Reporting & Actions</h3><p>Document results. For levels >85 dBA: implement hearing conservation program. >90 dBA: mandatory engineering controls + dual protection.</p></div>
+    </div>
+    <div style="background:#e0f2fe; border-radius: 24px; padding: 15px; margin-top: 15px; font-size:0.9rem;">
+        <i class="fas fa-calculator" style="color:#06b6d4; font-size:1.2rem; margin-right:8px;"></i>
+        <strong>Quick formula:</strong> TWA = 10 log₁₀(1/T ∑ tᵢ 10^(Lᵢ/10)). If TWA ≥ 85 dBA → mandatory PPE and audiometric testing.
+    </div>
+</section>
+
+<section class="section" id="sources">
+    <h2 class="section-title">Common High-Noise Manufacturing Sources</h2>
+    <p class="section-sub">Hover over any cyan bubble to see a realistic preview of the equipment causing dangerous noise levels.</p>
+    <div class="sources-cloud" id="sourcesCloud">
+        <span class="source-tag" data-source="Compressors" data-image="https://allaboutaircompressors.com/wp-content/uploads/2023/09/download-8-1.jpg"><i class="fas fa-compress-alt"></i> Compressors</span>
+        <span class="source-tag" data-source="Pumps & Motors" data-image="https://static.wixstatic.com/media/ba2cd3_614f1454dbb04aad96f1ecd8c4de708d~mv2.jpg/v1/fill/w_2500,h_1667,al_c/ba2cd3_614f1454dbb04aad96f1ecd8c4de708d~mv2.jpg"><i class="fas fa-oil-can"></i> Pumps & Motors</span>
+        <span class="source-tag" data-source="Conveyor belts" data-image="https://rolmasterconveyors.ca/wp-content/uploads/BeltConveyor-cat-500x500-1.jpg"><i class="fas fa-conveyor-belt"></i> Conveyor belts</span>
+        <span class="source-tag" data-source="Heavy machinery" data-image="https://www.procore.com/library/wp-content/uploads/2023/08/Construction-Noise-How-to-Protect-Workers-Reduce-Noise-Pollution-768x384.png"><i class="fas fa-industry"></i> Heavy machinery</span>
+        <span class="source-tag" data-source="Welding & Grinding" data-image="https://img.freepik.com/premium-photo/man-performing-welding-grinding-his-workplace-workshop_507946-650.jpg"><i class="fas fa-wrench"></i> Welding & Grinding</span>
+        <span class="source-tag" data-source="Pneumatic tools" data-image="https://www.homenish.com/wp-content/uploads/2020/12/Pneumatic-Tools.jpg"><i class="fas fa-tools"></i> Pneumatic tools</span>
+        <span class="source-tag" data-source="Textile production" data-image="https://static.vecteezy.com/system/resources/previews/034/557/008/non_2x/ai-generated-rice-fields-on-terraced-of-mu-cang-chai-vietnam-terraced-rice-field-in-harvest-season-in-mu-cang-ai-generated-free-photo.jpg"><i class="fas fa-tshirt"></i> Textile production</span>
+        <span class="source-tag" data-source="Wood production lines" data-image="https://img.freepik.com/premium-photo/production-line-wooden-floor-factory-cnc-automatic-woodworking-machine_179755-22.jpg?w=1380"><i class="fas fa-tree"></i> Wood production lines</span>
+        <span class="source-tag" data-source="Metal fabrication" data-image="https://www.midlandmetalproducts.com/wp-content/uploads/2021/09/Depositphotos_15750299_xl-2015-1-scaled.jpg"><i class="fas fa-fire"></i> Metal fabrication</span>
+    </div>
+    <div style="text-align: center; margin-top: 15px; background: #e0f2fe; padding: 12px; border-radius: 50px; font-size:0.85rem;">
+        <i class="fas fa-exclamation-triangle" style="color:#06b6d4;"></i> ⚠️ Any area where you need to raise your voice to speak to someone at arm's length is likely above 85 dB.
+    </div>
+</section>
+
+<section class="section" id="references">
+    <h2 class="section-title">📚 Regulatory References & Scientific Data</h2>
+    <p class="section-sub">Authoritative sources for factory noise exposure limits, hearing conservation, and safety guidelines.</p>
+    <div class="references-container">
+        <ul class="ref-list">
+            <li><i class="fas fa-gavel"></i> <strong>OSHA (Malaysia) Factories and Machinery Act 1967 & Noise Exposure Regulations 2019</strong> — Permissible exposure limit: 85 dBA for 8 hours; action level at 85 dBA requiring hearing conservation program.</li>
+            <li><i class="fas fa-book"></i> <strong>DOSH Malaysia Guidelines on Hearing Conservation Program</strong> — Mandates annual audiometry, noise monitoring, engineering controls, and worker training.</li>
+            <li><i class="fas fa-chart-line"></i> <strong>WHO Environmental Noise Guidelines (2018)</strong> — Identifies noise-induced hearing loss as the most common occupational disease; over 466 million people globally have disabling hearing loss, with 34% due to occupational noise.</li>
+            <li><i class="fas fa-microchip"></i> <strong>NIOSH (USA) Criterion for Occupational Noise Exposure</strong> — Recommended exposure limit (REL) 85 dBA for 8 hours; 3 dB exchange rate.</li>
+            <li><i class="fas fa-industry"></i> <strong>International Journal of Environmental Research and Public Health (2022)</strong> — Meta-analysis: workers exposed to >85 dBA have 3x higher risk of significant hearing threshold shift within 5 years.</li>
+            <li><i class="fas fa-tools"></i> <strong>ANSI S12.6-2016 (Hearing Protector Attenuation)</strong> — Standards for testing real-world protection levels.</li>
+            <li><i class="fas fa-chart-simple"></i> <strong>European Agency for Safety and Health at Work (EU-OSHA)</strong> — Noise fact sheet 34: engineering controls reduce exposure by up to 60% more effective than PPE alone.</li>
+            <li><i class="fas fa-database"></i> <strong>Malaysian Industrial Hygiene Association (MIHA)</strong> — Recommended practices for noise mapping and dosimetry in manufacturing lines.</li>
+        </ul>
+        <div style="margin-top: 20px; padding: 12px; background: #e0f2fe; border-radius: 20px; font-size:0.85rem;">
+            <i class="fas fa-info-circle" style="color:#06b6d4;"></i> <strong>Key Statistic:</strong> According to DOSH Malaysia (2023), 38% of manufacturing workers are exposed to noise levels exceeding 85 dBA, yet only 55% consistently wear hearing protection.
+        </div>
+    </div>
+</section>
+
+<section class="section" id="privacy">
+    <h2 class="section-title">🔒 Privacy & Data Ethics</h2>
+    <p class="section-sub">Your trust matters. We are committed to protecting your privacy and upholding ethical data practices.</p>
+    <div class="privacy-container">
+        <ul class="privacy-list">
+            <li><i class="fas fa-user-secret"></i> <strong>No Data Collection</strong> <span class="privacy-badge">GDPR Compliant</span><br>This website does not collect, store, or process any personal data. All conversations with the AI chatbot are temporary and are not saved or logged.</li>
+            <li><i class="fas fa-comment-dots"></i> <strong>Chatbot Transparency</strong> <span class="privacy-badge">AI Ethics</span><br>The Factory Noise AI assistant is an educational tool providing general information about noise safety. It does not give medical advice.</li>
+            <li><i class="fas fa-chart-line"></i> <strong>Anonymous Usage</strong> <span class="privacy-badge">Privacy First</span><br>No cookies, trackers, or analytics are used on this site. Your activity remains completely anonymous.</li>
+            <li><i class="fas fa-shield-alt"></i> <strong>Ethical AI Use</strong> <span class="privacy-badge">Responsible AI</span><br>The AI assistant provides accurate, unbiased safety information based on official regulations (OSHA, DOSH, NIOSH).</li>
+            <li><i class="fas fa-database"></i> <strong>Data Minimization</strong> <span class="privacy-badge">Best Practice</span><br>No personal information is required. All calculations happen locally in your browser.</li>
+            <li><i class="fas fa-gavel"></i> <strong>Regulatory Compliance</strong> <span class="privacy-badge">PDPA Compliant</span><br>This educational resource complies with Malaysian Personal Data Protection Act (PDPA) 2010.</li>
+        </ul>
+        <div style="margin-top: 20px; padding: 12px; background: #e0f2fe; border-radius: 20px; font-size:0.85rem;">
+            <i class="fas fa-envelope" style="color:#06b6d4;"></i> <strong>Questions?</strong> Contact: privacy@factorynoise-awareness.org
+        </div>
+    </div>
+</section>
+
+<section class="section" id="chatbot">
+    <h2 style="text-align:center;font-size:2rem;margin-bottom:15px;color:#0c4a6e;">Ask Factory Noise AI</h2>
+    <p style="text-align:center;color:gray;margin-bottom:30px;font-size:0.9rem;">Ask about PPE, OSHA laws, noise hazards, early signs of hearing loss, or factory safety.</p>
+    <div class="chatbot-wrapper">
+        <div class="chat-header"><i class="fas fa-robot"></i> Factory Noise Assistant</div>
+        <div class="chat-box" id="chat-box">
+            <div class="bot-msg">Hello! 👋 I am Factory Noise AI. Ask me about factory noise safety, early signs of hearing loss, safety routines, noise assessment methods, or OSHA regulations. Try saying "hello", "hearing protection", or "what is tinnitus"!</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Type your question...">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+</section>
+
+<footer>© 2026 Factory Noise Awareness | Malaysian OSH Campaign — Hearing protection is your right, use it. | <a href="#privacy">Privacy & Ethics</a></footer>
+
+<script>
+    // HOVER PREVIEW LOGIC
+    const previewDiv = document.createElement('div');
+    previewDiv.className = 'source-preview-img';
+    previewDiv.innerHTML = `<img id="previewImg" src="" alt="Equipment preview"><span id="previewLabel">Equipment</span>`;
+    document.body.appendChild(previewDiv);
+    const previewImg = document.getElementById('previewImg');
+    const previewLabel = document.getElementById('previewLabel');
+    
+    const sourceTags = document.querySelectorAll('.source-tag');
+    let activeTimer = null;
+    
+    function showPreview(imageUrl, labelText) {
+        if (!imageUrl) return;
+        previewImg.src = imageUrl;
+        previewLabel.innerText = labelText;
+        previewDiv.classList.add('visible');
+        if (activeTimer) clearTimeout(activeTimer);
+    }
+    
+    function hidePreviewWithDelay() {
+        if (activeTimer) clearTimeout(activeTimer);
+        activeTimer = setTimeout(() => {
+            previewDiv.classList.remove('visible');
+        }, 150);
+    }
+    
+    function cancelHide() {
+        if (activeTimer) {
+            clearTimeout(activeTimer);
+            activeTimer = null;
+        }
+    }
+    
+    sourceTags.forEach(tag => {
+        const imgUrl = tag.getAttribute('data-image');
+        const sourceName = tag.getAttribute('data-source') || tag.innerText.trim();
+        tag.addEventListener('mouseenter', () => {
+            cancelHide();
+            if (imgUrl) {
+                showPreview(imgUrl, sourceName);
+            } else {
+                showPreview('https://images.unsplash.com/photo-1581092335449-c615862c3fd0?w=400&h=400&fit=crop', sourceName);
+            }
+        });
+        tag.addEventListener('mouseleave', () => {
+            hidePreviewWithDelay();
+        });
+    });
+    previewDiv.addEventListener('mouseenter', () => cancelHide());
+    previewDiv.addEventListener('mouseleave', () => hidePreviewWithDelay());
+    
+    // MODAL AND QUIZ
+    const modal = document.getElementById('interactiveModal');
+    const modalContentDiv = document.getElementById('modalDynamicContent');
+    const closeModalBtn = document.getElementById('modalCloseBtn');
+
+    function openModal(contentHTML) {
+        modalContentDiv.innerHTML = contentHTML;
+        modal.classList.add('active');
+    }
+    function closeModal() { modal.classList.remove('active'); }
+    closeModalBtn.onclick = closeModal;
+    modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+
+    const quizQuestions = [
+        { text: "What is the OSHA / Malaysian 8-hour time-weighted average exposure limit for noise?", options: ["A) 75 dBA", "B) 85 dBA", "C) 95 dBA", "D) 105 dBA"], correct: "B" },
+        { text: "Which type of hearing protection offers the highest noise reduction when used together?", options: ["A) Foam plugs only", "B) Earmuffs only", "C) Dual protection (plugs + muffs)", "D) Cotton balls"], correct: "C" },
+        { text: "What is a common early sign of noise-induced hearing loss in factory workers?", options: ["A) Improved hearing in noisy areas", "B) Persistent ringing in the ears (tinnitus)", "C) Decreased blood pressure", "D) Enhanced speech clarity"], correct: "B" },
+        { text: "Which engineering control is most effective to reduce noise at the source?", options: ["A) Providing earplugs", "B) Job rotation", "C) Installing acoustic barriers or silencers", "D) Annual hearing tests"], correct: "C" },
+        { text: "At approximately what noise level is it necessary to raise your voice to speak to someone at arm's length?", options: ["A) 70 dBA", "B) 75 dBA", "C) 85 dBA", "D) 100 dBA"], correct: "C" }
+    ];
+
+    function showQuiz() {
+        let currentQIndex = 0;
+        let score = 0;
+        let userAnswers = new Array(quizQuestions.length).fill(null);
+        
+        function renderQuestion() {
+            const q = quizQuestions[currentQIndex];
+            let optionsHtml = '';
+            q.options.forEach(opt => {
+                const letter = opt.charAt(0);
+                optionsHtml += `<div class="quiz-option" data-opt-val="${letter}">${opt}</div>`;
+            });
+            const nextBtnText = (currentQIndex === quizQuestions.length - 1) ? "Finish Quiz" : "Next Question";
+            openModal(`
+                <h3><i class="fas fa-ear-listen"></i> Noise Safety Quiz (${currentQIndex+1}/${quizQuestions.length})</h3>
+                <p style="margin-bottom:15px; font-weight:500;">${q.text}</p>
+                <div id="quizOptions">${optionsHtml}</div>
+                <div id="quizFeedback" class="quiz-feedback"></div>
+                <button id="quizNavBtn" class="btn" style="margin-top:15px; width:100%; padding:10px;">${nextBtnText}</button>
+            `);
+            
+            document.querySelectorAll('#quizOptions .quiz-option').forEach(opt => {
+                opt.addEventListener('click', () => {
+                    const selectedVal = opt.getAttribute('data-opt-val');
+                    const isCorrect = (selectedVal === q.correct);
+                    const feedbackDiv = document.getElementById('quizFeedback');
+                    if (isCorrect) {
+                        feedbackDiv.innerHTML = '<span style="color:#06b6d4;">✓ Correct!</span>';
+                        if (userAnswers[currentQIndex] !== true) {
+                            userAnswers[currentQIndex] = true;
+                            score++;
+                        }
+                    } else {
+                        feedbackDiv.innerHTML = '<span style="color:#ef4444;">✗ Incorrect.</span>';
+                        if (userAnswers[currentQIndex] !== false) {
+                            userAnswers[currentQIndex] = false;
+                        }
+                    }
+                    let recalcScore = 0;
+                    for (let i = 0; i < quizQuestions.length; i++) {
+                        if (userAnswers[i] === true) recalcScore++;
+                    }
+                    score = recalcScore;
+                });
+            });
+            
+            const navBtn = document.getElementById('quizNavBtn');
+            if (navBtn) {
+                navBtn.onclick = () => {
+                    if (userAnswers[currentQIndex] === null) {
+                        document.getElementById('quizFeedback').innerHTML = '<span style="color:#ff9800;">⚠️ Please select an answer before continuing.</span>';
+                        return;
+                    }
+                    if (currentQIndex + 1 < quizQuestions.length) {
+                        currentQIndex++;
+                        renderQuestion();
+                    } else {
+                        let message = '';
+                        if (score === quizQuestions.length) message = "Excellent! You're a noise safety expert! 🎉";
+                        else if (score >= 3) message = "Good job! Review the topics to become an expert.";
+                        else message = "Keep learning! Review the safety routine and references on this page.";
+                        openModal(`<h3>📊 Quiz Completed!</h3><p style="font-size:1.8rem; font-weight:800; margin:15px 0;">${score}/${quizQuestions.length}</p><p>${message}</p><button class="btn" style="margin-top:15px; width:100%;" onclick="closeModal()">Close</button>`);
+                    }
+                };
+            }
+        }
+        renderQuestion();
+    }
+
+    function showCalculator() {
+        openModal(`
+            <h3><i class="fas fa-calculator"></i> Noise Exposure Calculator</h3>
+            <p>Estimate your daily noise dose based on time and decibel level.</p>
+            <div class="calculator-field"><label>Noise Level (dBA):</label><input type="number" id="calcDb" value="92" step="1" min="70" max="120"></div>
+            <div class="calculator-field"><label>Exposure Duration (hours):</label><input type="number" id="calcHours" value="4" step="0.5" min="0.5" max="12"></div>
+            <button id="computeDoseBtn" class="btn" style="width:100%; padding:10px;">Calculate Dose</button>
+            <div id="calcResultDisplay" class="calc-result"><strong>Daily Noise Dose: </strong><span id="dosePercent">--</span>%<p id="riskMessage"></p></div>
+        `);
+        const computeBtn = document.getElementById('computeDoseBtn');
+        computeBtn.onclick = () => {
+            const dB = parseFloat(document.getElementById('calcDb').value);
+            const hours = parseFloat(document.getElementById('calcHours').value);
+            if(isNaN(dB) || isNaN(hours) || dB < 70 || hours <= 0) { document.getElementById('dosePercent').innerText = 'Invalid'; document.getElementById('riskMessage').innerText = 'Please enter valid values.'; return; }
+            let allowedTime = 8 / Math.pow(2, (dB - 90) / 5);
+            if(dB < 85) allowedTime = 24;
+            let dose = (hours / allowedTime) * 100;
+            dose = Math.min(dose, 400);
+            document.getElementById('dosePercent').innerText = Math.round(dose);
+            const riskMsg = document.getElementById('riskMessage');
+            if(dose <= 50) riskMsg.innerHTML = "✅ Safe exposure. Keep using protection.";
+            else if(dose <= 100) riskMsg.innerHTML = "⚠️ Approaching limit. Reduce exposure or upgrade PPE.";
+            else riskMsg.innerHTML = "🔴 OVEREXPOSURE! Risk of permanent hearing damage. Immediate action required.";
+        };
+    }
+    function showPreventive() {
+        openModal(`
+            <h3><i class="fas fa-shield-virus"></i> Noise Preventive Measures</h3>
+            <p>Effective strategies to prevent noise-induced hearing loss in factories:</p>
+            <ul class="prevent-list"><li><i class="fas fa-microphone-alt"></i> <strong>Engineering Controls</strong> – Sound barriers, silencers, equipment maintenance.</li><li><i class="fas fa-tasks"></i> <strong>Administrative Controls</strong> – Job rotation, limiting exposure time, quiet breaks.</li><li><i class="fas fa-head-side-headphones"></i> <strong>Hearing Protection Devices</strong> – Proper fit-testing, training, and consistent use.</li><li><i class="fas fa-chart-line"></i> <strong>Audiometric Testing</strong> – Annual hearing checks to detect early shifts.</li><li><i class="fas fa-bullhorn"></i> <strong>Noise Mapping & Awareness</strong> – Identify hotspots and empower workers.</li></ul><button class="btn" style="margin-top:15px; width:100%;" onclick="closeModal()">Understand & Protect</button>
+        `);
+    }
+    document.getElementById('quizBadge').addEventListener('click', showQuiz);
+    document.getElementById('calculatorBadge').addEventListener('click', showCalculator);
+    document.getElementById('preventiveBadge').addEventListener('click', showPreventive);
+    
+    // Navbar, device cards, accordion
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { if (window.scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); });
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinksList = document.getElementById('navLinks');
+    if (menuToggle) { menuToggle.addEventListener('click', () => { navLinksList.classList.toggle('active'); }); }
+    document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => navLinksList.classList.remove('active')); });
+    const deviceCards = document.querySelectorAll('.device-card');
+    deviceCards.forEach(card => { card.addEventListener('click', () => { deviceCards.forEach(c => c.classList.remove('active')); card.classList.add('active'); }); });
+    if (deviceCards.length) deviceCards[0].classList.add('active');
+    const practiceHeaders = document.querySelectorAll('.practice-header');
+    practiceHeaders.forEach(header => { header.addEventListener('click', () => { const parent = header.parentElement; parent.classList.toggle('open'); const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up'); if (icon) { if (parent.classList.contains('open')) icon.className = 'fas fa-chevron-up'; else icon.className = 'fas fa-chevron-down'; } }); });
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function(e) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }); });
+    
+    // CHATBOT FUNCTION
+    const inputField = document.getElementById("user-input");
+    inputField.addEventListener("keypress", function(event) { if (event.key === "Enter") sendMessage(); });
+    
+    function sendMessage() { 
+        const input = document.getElementById("user-input"); 
+        const chatBox = document.getElementById("chat-box"); 
+        const message = input.value.trim(); 
+        if (message === "") return; 
+        
+        const userDiv = document.createElement("div"); 
+        userDiv.className = "user-msg"; 
+        userDiv.innerText = message;
+        chatBox.appendChild(userDiv); 
+        input.value = ""; 
+        
+        const botDiv = document.createElement("div"); 
+        botDiv.className = "bot-msg"; 
+        botDiv.innerHTML = "🤔 Thinking...";
+        chatBox.appendChild(botDiv); 
+        chatBox.scrollTop = chatBox.scrollHeight; 
+        
+        setTimeout(() => { 
+            botDiv.innerHTML = getAIResponse(message);
+            chatBox.scrollTop = chatBox.scrollHeight; 
+        }, 500); 
+    }
+
+    function getAIResponse(input) { 
+        const msg = input.toLowerCase().trim(); 
+        if (msg.match(/^(hello|hi|hey|greetings|sup|good morning|good afternoon|good evening)$/i)) {
+            return "👋 <strong>Hello there!</strong><br><br>Welcome to Factory Noise AI. How can I help you today?";
+        }
+        if (msg.includes("hearing protection") || msg.includes("earplug") || msg.includes("earmuff") || msg.includes("ppe")) {
+            return "🔊 <strong>Hearing Protection Devices:</strong><br>• Foam Earplugs (NRR up to 33 dB)<br>• Earmuffs (NRR 20-30 dB)<br>• Dual Protection for extreme noise >100 dB<br>• Custom-molded for daily use";
+        }
+        if (msg.includes("safety routine") || msg.includes("daily routine")) {
+            return "📋 <strong>Daily Safety Routine:</strong><br>🔹 Before Shift: Inspect PPE<br>🔹 During Shift: Wear protection, take quiet breaks<br>🔹 After Shift: Self-check for ringing<br>🔹 Weekly: Team safety huddle";
+        }
+        if (msg.includes("noise assessment") || msg.includes("monitoring")) {
+            return "📊 <strong>Noise Assessment:</strong><br>1. Walkthrough to identify hot zones<br>2. Sound level meter measurements<br>3. Personal dosimetry (8-hour TWA)<br>4. Document and implement controls";
+        }
+        if (msg.includes("early sign") || msg.includes("tinnitus") || msg.includes("ringing")) {
+            return "⚠️ <strong>Early Signs:</strong><br>• Persistent ringing (Tinnitus)<br>• Muffled hearing after shift<br>• Difficulty understanding speech<br>• Needing higher volume";
+        }
+        if (msg.includes("85") || msg.includes("dba") || msg.includes("limit") || msg.includes("osha")) {
+            return "⚖️ <strong>Noise Regulations:</strong><br>• Permissible limit: 85 dBA over 8 hours<br>• Action level at 85 dBA requires hearing conservation program<br>• Annual audiometry mandatory";
+        }
+        if (msg.includes("privacy") || msg.includes("data")) {
+            return "🔒 <strong>Privacy & Ethics:</strong><br>• No data collection or storage<br>• No cookies or trackers<br>• Educational information only<br>• All calculations done locally in your browser";
+        }
+        return "💡 <strong>I can help with:</strong><br>• Hearing protection<br>• Early signs of hearing loss<br>• Safety routines<br>• Noise assessment<br>• OSHA regulations<br>• Privacy & ethics<br><br>Try asking: 'What is hearing protection?' or 'Tell me about safety routine'";
+    }
+</script>
+</body>
+</html>
